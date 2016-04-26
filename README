@@ -1,45 +1,5 @@
-Busca Fonética
+English-US Soundex
 
-Seu programa deve ler uma lista de palavras da entrada padrão (i.e. o console, terminal ou prompt de comando – veja http://en.wikipedia.org/wiki/Standard_streams). Os argumentos da linha de comando devem ser palavras. Para cada uma destas palavras, você deve imprimir todas as palavras foneticamente equivalentes às contidas num dado dicionário.
+Usage:
 
-O algoritmo que decide se uma palavra é foneticamente equivalente à outra segue as seguintes regras nesta exata ordem:
-1. Todo caracter não-alfabético deve ser ignorado
-
-2. Não deve haver diferença entre letras minúsculas e maiúsculas
-
-3. Depois da primeira letra, qualquer uma das seguintes letras devem ser descartadas: A, E, I, H, O, U, W, Y.
-
-4. Os seguintes conjuntos de letras são considerados equivalentes:
-{A, E, I, O, U}
-{C, G, J, K, Q, S, X, Y, Z}
-{B, F, P, V, W}
-{D, T}
-{M, N}
-Todas as outras letras não tem equivalente
-
-5. Quaisquer ocorrências consecutivas de letras equivalentes (depois de descartas as letras no passo 3) são consideradas como uma ocorrência única.
-
-Exemplo:
-
-Dicionário de palavras “word_dict.txt”:
-angel
-brave
-Braev
-Don
-Engel
-go
-goal
-son
-sunny
-Tom
-Tooonnnnyyyy
-
-Executando o seu programa com a linha de comando:
-
-MyProgram 1ton# brief soon < word_dict.txt
-
-Deve imprimir na saída padrão:
-
-1ton#: Don, Tom, Tooonnnnyyyy
-brief: brave, Braev
-soon: son, sunny
+ruby phonetic.rb word1 word2 wordN < dict_file.txt
