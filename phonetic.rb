@@ -17,30 +17,63 @@ def prepare(word)
 	_word = aux[0]
 	## remove unwanted chars and add back the first char
 	_word << aux.gsub(/[^b-dfgj-np-tvxz]/, '')
-	## remove all vowels since they are equivalents
-	_word = _word.gsub(/[aeiou]/, '')
 	## remove repeating chars
 	_word.squeeze!
+	## change equivalent chars to pre-defined basic chars
+	_word.gsub!(/[aeiou]/, 'a')
+	_word.gsub!(/[cgjkqsxyz]/, 'c')
+	_word.gsub!(/[bfpvw]/, 'b')
+	_word.gsub!(/[dt]/, 'd')
+	_word.gsub!(/[mn]/, 'm')
 	return _word
 end
 
 #################################################################
 #	function that checks the phonetic equivalency		#
-#		and prints the result				#
+#	between two giver words and prints the result		#
 #								#
-#	param word : the word to be checked			#
+#	param word1 word2 : the words to be checked		#
+#								#
+#	return string : the word, if they are equivalent	#
 #################################################################
-def check(word)
-	puts word
+def check(word1, word2)
+	_word1 = prepare(word1)
+	_word2 = prepare(word2)
+	if(_word1 == _word2)
+		return word2
+	else
+		return ''
+	end
 end
 
-dict = File.open("word_dict.txt", "r")
-contents = dict.read
-
-ARGV.each do|input|
-	check(prepare(input))
+#################################################################
+#								#
+#			     main				#
+#								#
+#################################################################
+contents = []
+STDIN.each_line do |line|
+	contents.push(line)
 end
 
-puts 'ruby ruby rubeeey'
-
-dict.close
+ARGV.each do |input|
+	_result = []
+	contents.each do |_dictWord|
+		_result.push(check(input, _dictWord))
+	end
+	output = ''
+	output << input + ": "
+	first = true
+	_result.each do |word|
+		if(word != '')
+			word.delete!("\n")
+			if(!first)
+				output << ", " + word
+			else
+				first = false
+				output << word
+			end
+		end
+	end
+	puts output
+end
